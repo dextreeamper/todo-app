@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import TodoList from './todos-list';
+import TodosList from './todos-list';
 import '../App.css';
 
 const todos = [
 {
-	task: 'watching React Tutorial',
+	task: 'watching react tuts',
 	isCompleted: true
 },
 {
@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>React Todos App</h1>
-				<TodoList todos={this.state.todos} />
+				<TodosList todos={this.state.todos} />
       </div>
     );
   }
