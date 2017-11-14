@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class TodosListItem extends Component {
     constructor(props) {
         super(props);
+        // this.onClick = this.onClick.bind(this);
 
         this.state = {
             isEditing: false
@@ -20,10 +21,28 @@ class TodosListItem extends Component {
         }
         //this will be the default layout
         return(
-            <tr>
+            <td>
                 <button onClick={this.onEditClick.bind(this)}>Edit</button>
                 <button>Delete</button>
-            </tr>
+            </td>
+        );
+    }
+    renderTaskColor() {
+        //converted to variable 'task'
+        const { task, isCompleted } = this.props;
+        //display the object
+        // console.log(this.props);
+        const styleColor = {
+            //ternary operator on react if true = green, false = red
+            color: isCompleted ? 'green' : 'red',
+            cursor: 'pointer'
+        };
+
+        return (
+            <td style={styleColor}
+                onClick={this.props.toggleTask.bind(this, task)}>
+                {task}
+            </td>
         );
     }
 
@@ -31,7 +50,8 @@ class TodosListItem extends Component {
     // console.log(this.props.task)
     return (
         <tr>
-            <td>{this.props.task}</td>
+            {/* <td>{this.props.task}</td> */}
+            {this.renderTaskColor()}
             {this.renderActionSelection()}
     	</tr>
     );
