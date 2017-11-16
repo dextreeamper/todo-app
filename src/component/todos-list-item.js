@@ -23,7 +23,7 @@ class TodosListItem extends Component {
         return(
             <td>
                 <button onClick={this.onEditClick.bind(this)}>Edit</button>
-                <button>Delete</button>
+                <button onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
             </td>
         );
     }
@@ -81,9 +81,9 @@ class TodosListItem extends Component {
     onSaveClick(event){
         event.preventDefault();
 
-        const oldTask = this.props.task;
-        const newTask = this.refs.editInput.value;
-        this.props.saveTask(oldTask, newTask);
+        const oldTask = this.props.task; //pass our old array to oldTask
+        const newTask = this.refs.editInput.value; //reference that we define on input type
+        this.props.saveTask(oldTask, newTask); //saveTask are from main component thats why declare as props
         this.setState({ isEditing: false });
     }
 

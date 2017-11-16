@@ -29,12 +29,16 @@ class App extends Component {
     return (
       <div className="App">
         <h1>React Todos App</h1>
-        <CreateTodo createTask={this.createTask.bind(this)} />
+        <CreateTodo 
+        	todos={this.state.todos} 
+        	createTask={this.createTask.bind(this)} 
+        />
 				<TodosList 
 					todos={this.state.todos} 
 					//bind thid because were setting the state
 					toggleTask={this.toggleTask.bind(this)}
 					saveTask={this.saveTask.bind(this)}
+					deleteTask={this.deleteTask.bind(this)}
 				/>
       </div>
     );
@@ -66,10 +70,15 @@ class App extends Component {
   	this.setState({ todos: this.state.todos });
   }
 
-  saveTask(oldTask, newTask){
+  saveTask(oldTask, newTask) {
   	//find the todo that we clicked which is oldTask and change it to newTask
   	const foundTodo = _.find(this.state.todos, todo => todo.task === oldTask);
   	foundTodo.task = newTask;
+  	this.setState({ todos: this.state.todos });
+  }
+
+  deleteTask(deleteTaskTodo) {
+  	_.remove(this.state.todos, todo => todo.task === deleteTaskTodo)
   	this.setState({ todos: this.state.todos });
   }
 
