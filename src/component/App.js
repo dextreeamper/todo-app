@@ -32,7 +32,9 @@ class App extends Component {
         <CreateTodo createTask={this.createTask.bind(this)} />
 				<TodosList 
 					todos={this.state.todos} 
+					//bind thid because were setting the state
 					toggleTask={this.toggleTask.bind(this)}
+					saveTask={this.saveTask.bind(this)}
 				/>
       </div>
     );
@@ -42,6 +44,9 @@ class App extends Component {
   //find todo task that matches were passing in which is task that we clicked
   toggleTask(task) {
   	//find the todo that we clicked
+  	//find the todo array that matches the todo that were editing
+  	//1st this will be the array this.state.todos
+  	//2nd find the todo task that matches the task todo => todo.task === task
   	const foundTodo = _.find(this.state.todos, todo => todo.task === task);
   	//swap the status of isCompleted
   	foundTodo.isCompleted = !foundTodo.isCompleted;
@@ -51,7 +56,7 @@ class App extends Component {
   }
 
   //push all the task to todos state from input
-  //push to react dom
+  //push to react dom / push the task to state and rerender the state
   createTask(task) {
   	this.state.todos.push({
   		task,
@@ -61,6 +66,19 @@ class App extends Component {
   	this.setState({ todos: this.state.todos });
   }
 
+  saveTask(oldTask, newTask){
+  	//find the todo that we clicked which is oldTask and change it to newTask
+  	const foundTodo = _.find(this.state.todos, todo => todo.task === oldTask);
+  	foundTodo.task = newTask;
+  	this.setState({ todos: this.state.todos });
+  }
+
 }
 
 export default App;
+
+
+
+
+
+
